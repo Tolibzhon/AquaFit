@@ -1,4 +1,4 @@
-import 'package:aqua_fit/feature/widgets/buttom_navigator.dart';
+import 'package:aqua_fit/feature/auth/onbording_screen.dart';
 import 'package:aqua_fit/feature/widgets/spaces.dart';
 import 'package:aqua_fit/helpers/app_images.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => const BottomNavigatorScreen(),
+            builder: (context) => const OnBordingScreen(),
           ),
           (protected) => false,
         );
