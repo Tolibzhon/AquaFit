@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "816722640394",
+    "project_id": "aqua-fit-e37c4",
+    "storage_bucket": "aqua-fit-e37c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816722640394:android:cc5129921ec4f306f329f3",
+        "android_client_info": {
+          "package_name": "com.example.aqua_fit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816722640394-33cu3jh3slufaa8jsd0o7o77mfll9sbp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUbbVFYG2vJzNu-gbHdWYzzwh33Z-TOmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816722640394-33cu3jh3slufaa8jsd0o7o77mfll9sbp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
