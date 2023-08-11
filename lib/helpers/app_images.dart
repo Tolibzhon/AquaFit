@@ -27,4 +27,5 @@ class AppImages {
   static const String termsIcon = 'assets/images/termsIcon.png';
   static const String trainIcon = 'assets/images/trainIcon.png';
   static const String waterIcon = 'assets/images/waterIcon.png';
+    static const String closeShow = 'assets/images/closeShow.png';
 }
