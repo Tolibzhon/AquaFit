@@ -19,5 +19,11 @@ class AppImages {
   static const String onBording1 = 'assets/images/onBording1.png';
   static const String onBording2 = 'assets/images/onBording2.png';
   static const String onBording3 = 'assets/images/onBording3.png';
+  static const String positiveImage = 'assets/images/positiveImage.png';
+  static const String privacyIcon = 'assets/images/privacyIcon.png';
+  static const String restoreIcon = 'assets/images/restoreIcon.png';
+  static const String supportIcon = 'assets/images/supportIcon.png';
+  static const String termsIcon = 'assets/images/termsIcon.png';
   static const String trainIcon = 'assets/images/trainIcon.png';
+  static const String waterIcon = 'assets/images/waterIcon.png';
 }
