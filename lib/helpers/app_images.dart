@@ -4,6 +4,7 @@ class AppImages {
   static const String imageSplash = 'assets/images/ImageSplash.png';
   static const String premiumImage = 'assets/images/PremiumImage.png';
   static const String checkIcon = 'assets/images/checkIcon.png';
+  static const String checkPremium = 'assets/images/checkPremium.png';
   static const String closeIcon = 'assets/images/closeICon.png';
   static const String congrats = 'assets/images/congrats.png';
   static const String navbarPlan = 'assets/images/navbarPlan.png';

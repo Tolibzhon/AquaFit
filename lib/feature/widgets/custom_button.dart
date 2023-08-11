@@ -13,7 +13,7 @@ class CustomButton extends StatelessWidget {
     this.height,
     this.isLoading = false,
     this.width,
-    this.radius = 8,
+    this.radius = 20,
     this.isGradient = false,
     this.icon,
     this.style,

@@ -21,7 +21,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: Text(
           title,
           maxLines: 2,
-          style: AppTextStyles.s20W600(
+          style: AppTextStyles.s24W600(
             color: AppColors.black,
           ),
         ),
