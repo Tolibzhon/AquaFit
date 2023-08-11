@@ -216,7 +216,7 @@ abstract class AppTextStyles {
         fontWeight: FontWeight.w500,
         color: color ?? Colors.black,
       );
-      static s32W700({Color? color}) => TextStyle(
+  static s32W700({Color? color}) => TextStyle(
         fontSize: 32,
         fontWeight: FontWeight.w700,
         color: color ?? Colors.black,
@@ -248,6 +248,11 @@ abstract class AppTextStyles {
       );
   static s64W700({Color? color}) => TextStyle(
         fontSize: 64,
+        fontWeight: FontWeight.w700,
+        color: color ?? Colors.black,
+      );
+  static s128W700({Color? color}) => TextStyle(
+        fontSize: 128,
         fontWeight: FontWeight.w700,
         color: color ?? Colors.black,
       );
