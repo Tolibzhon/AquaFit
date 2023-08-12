@@ -39,7 +39,7 @@ dependencies:
   webview_flutter: ^3.0.4
   shared_preferences: ^2.0.15
   flutter_local_notifications: ^9.8.0+1 
-  overlay_support: ^1.2.1
+  overlay_support: ^2.1.0
   freezed: ^2.1.1
   freezed_annotation: ^2.1.0
   flutter_bloc: ^8.1.1

@@ -1,3 +1,5 @@
+import 'package:aqua_fit/feature/plan/data/domain/local_done_exercise_ds.dart';
+import 'package:aqua_fit/feature/plan/data/workouts_model.dart';
 import 'package:aqua_fit/feature/saved/logic/cubits/set_workout_hive_cubit/set_workout_hive_cubit.dart';
 import 'package:aqua_fit/feature/saved/logic/model/workout_hive_model.dart';
 import 'package:aqua_fit/feature/saved/logic/repositories/workout_repo.dart';
@@ -12,17 +14,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FinishedScreen extends StatefulWidget {
-  const FinishedScreen(
-      {super.key,
-      required this.title,
-      required this.calories,
-      required this.day,
-      required this.duration, required this.index});
+  const FinishedScreen({
+    super.key,
+    required this.title,
+    required this.calories,
+    required this.day,
+    required this.duration,
+    required this.index,
+    required this.dayModel,
+  });
   final String title;
   final int calories;
   final int day;
   final int duration;
   final int index;
+  final Day dayModel;
 
   @override
   State<FinishedScreen> createState() => _FinishedScreenState();
@@ -92,26 +98,6 @@ class _FinishedScreenState extends State<FinishedScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Row(
-                    children: [
-                      const Spacer(),
-                      InkWell(
-                          onTap: () {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const BottomNavigatorScreen(),
-                              ),
-                              (protected) => false,
-                            );
-                          },
-                          child: Image.asset(AppImages.closeIcon, width: 35)),
-                    ],
-                  ),
-                ),
                 Stack(
                   children: [
                     Container(
@@ -283,6 +269,14 @@ class _FinishedScreenState extends State<FinishedScreen> {
                                           context
                                               .read<SetWorkoutHiveCubit>()
                                               .setWorkout(workoutHiveModel);
+
+                                          // FARUH CODE
+
+                                          await LocalDoneDaysDataSource
+                                              .setDoneDay(
+                                                  '${widget.title}${widget.day}');
+
+                                          // Faruh Code
                                         }
                                       : () {
                                           Navigator.pushAndRemoveUntil(
@@ -320,7 +314,11 @@ class _FinishedScreenState extends State<FinishedScreen> {
                 ),
                 const SizedBox(height: 25),
                 CustomButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    // Faruh Code
+                    await LocalDoneDaysDataSource.setDoneDay(
+                        '${widget.title}${widget.day}');
+                    // Faruh Code
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(

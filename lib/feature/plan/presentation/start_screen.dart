@@ -15,7 +15,9 @@ class StartScreen extends StatefulWidget {
     required this.image,
     required this.title,
     required this.calories,
-    required this.day, required this.index,
+    required this.day,
+    required this.index,
+    required this.dayModel,
   });
   final List<Exercise> exercises;
   final String image;
@@ -23,6 +25,7 @@ class StartScreen extends StatefulWidget {
   final int calories;
   final int day;
   final int index;
+  final Day dayModel;
   @override
   State<StartScreen> createState() => _StartScreenState();
 }
@@ -268,7 +271,9 @@ class _StartScreenState extends State<StartScreen> {
                                       title: widget.title,
                                       calories: widget.calories,
                                       day: widget.day,
-                                      duration: secondMain, index: widget.index,
+                                      duration: secondMain,
+                                      index: widget.index,
+                                      dayModel: widget.dayModel,
                                     ),
                                   ),
                                   (protected) => false,

@@ -12,7 +12,8 @@ class DayScreen extends StatelessWidget {
       required this.day,
       required this.image,
       required this.title,
-      required this.calories, required this.index});
+      required this.calories,
+      required this.index});
   final Day day;
   final String image;
   final String title;
@@ -46,6 +47,7 @@ class DayScreen extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => StartScreen(
                         image: image,
+                        dayModel: day,
                         exercises: day.exercises,
                         title: title,
                         day: day.day,
