@@ -25,6 +25,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   int waterCons = 0;
   @override
   void initState() {
+    context.read<GetWorkoutHiveCubit>().getWorkout();
     savedData();
     super.initState();
   }
@@ -357,7 +358,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 20),
+                      SizedBox(height: 20),
                     ],
                   );
                 },
