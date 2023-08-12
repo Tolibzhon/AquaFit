@@ -2,10 +2,10 @@ import 'package:aqua_fit/feature/plan/data/workouts_model.dart';
 import 'package:aqua_fit/feature/plan/presentation/day_screen.dart';
 import 'package:aqua_fit/feature/plan/presentation/widget/widget_workuot.dart';
 import 'package:aqua_fit/feature/widgets/custom_app_bar.dart';
-import 'package:aqua_fit/feature/widgets/custom_button.dart';
 import 'package:aqua_fit/feature/widgets/spaces.dart';
 import 'package:aqua_fit/helpers/app_colors.dart';
 import 'package:aqua_fit/helpers/app_text_styles.dart';
+import 'package:aqua_fit/helpers/saved_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -13,18 +13,17 @@ import 'package:shimmer/shimmer.dart';
 
 class WorkoutScreen extends StatelessWidget {
   const WorkoutScreen({super.key, required this.model});
-final WorkoutsModel model;
+  final WorkoutsModel model;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  CustomAppBar(title:model.title),
+      appBar: CustomAppBar(title: model.title),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Column(
           children: [
             CachedNetworkImage(
-              imageUrl:
-                  model.image,
+              imageUrl: model.image,
               placeholder: (_, url) {
                 return SizedBox(
                   height: 180,
@@ -48,7 +47,7 @@ final WorkoutsModel model;
                   width: getWidth(context),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    image:  DecorationImage(
+                    image: DecorationImage(
                       image: NetworkImage(
                         model.image,
                       ),
@@ -59,18 +58,36 @@ final WorkoutsModel model;
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                       model.title,
+                        model.title,
                         style: AppTextStyles.s24W700(color: Colors.white),
                       ),
                       const Spacer(),
-                      LinearPercentIndicator(
-                        alignment: MainAxisAlignment.start,
-                        barRadius: const Radius.circular(10),
-                        lineHeight: 10.0,
-                        percent: 0.25,
-                        backgroundColor: AppColors.lightGrey,
-                        progressColor: AppColors.colorFFE177Yellow,
-                      ),
+                      FutureBuilder(
+                          future: SavedData.getDay(),
+                          builder: (context, data) {
+                            return LinearPercentIndicator(
+                              alignment: MainAxisAlignment.start,
+                              barRadius: const Radius.circular(10),
+                              lineHeight: 10.0,
+                              percent: data == 1
+                                  ? 0.14
+                                  : data == 2
+                                      ? 0.28
+                                      : data == 3
+                                          ? 0.42
+                                          : data == 4
+                                              ? 0.56
+                                              : data == 5
+                                                  ? 0.70
+                                                  : data == 6
+                                                      ? 0.85
+                                                      : data == 7
+                                                          ? 1
+                                                          : 0,
+                              backgroundColor: AppColors.lightGrey,
+                              progressColor: AppColors.colorFFE177Yellow,
+                            );
+                          }),
                       const SizedBox(height: 4),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -107,16 +124,16 @@ final WorkoutsModel model;
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>  DayScreen(
-                          image:model.image,
-                          day: model.days[index],),
+                        builder: (context) => DayScreen(
+                          image: model.image,
+                          day: model.days[index],
+                        ),
                       ),
                     );
                   },
                 ),
               ),
             ),
-            
           ],
         ),
       ),
