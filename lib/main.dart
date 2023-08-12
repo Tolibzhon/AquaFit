@@ -2,6 +2,7 @@ import 'package:aqua_fit/feature/auth/splash_screen.dart';
 import 'package:aqua_fit/feature/saved/logic/cubits/get_workout_hive_cubit/get_workout_hive_cubit.dart';
 import 'package:aqua_fit/feature/saved/logic/model/workout_hive_model.dart';
 import 'package:aqua_fit/feature/saved/logic/repositories/workout_repo.dart';
+import 'package:aqua_fit/feature/widgets/buttom_navigator.dart';
 import 'package:aqua_fit/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
           splashColor: Colors.transparent,
           splashFactory: NoSplash.splashFactory,
         ),
-        home: const SplashScreen(),
+        home: const BottomNavigatorScreen() //SplashScreen(),//BottomNavigatorScreen()
       ),
     );
   }

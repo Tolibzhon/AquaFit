@@ -1,31 +1,49 @@
+import 'package:aqua_fit/feature/plan/data/workouts_model.dart';
 import 'package:aqua_fit/feature/plan/presentation/start_screen.dart';
 import 'package:aqua_fit/feature/plan/presentation/widget/widget_day.dart';
 import 'package:aqua_fit/feature/widgets/custom_app_bar.dart';
+import 'package:aqua_fit/feature/widgets/custom_button.dart';
+import 'package:aqua_fit/helpers/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class DayScreen extends StatelessWidget {
-  const DayScreen({super.key});
-
+  const DayScreen({super.key, required this.day, required this.image});
+  final Day day;
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Workout Screen'),
+      appBar: CustomAppBar(title: 'Day ${day.day}'),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
-        child: ListView.separated(
-          shrinkWrap: true,
-          itemCount: 8,
-          separatorBuilder: (context, index) => const SizedBox(height: 10),
-          itemBuilder: (context, index) => WidgetDay(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const StartScreen(),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.separated(
+                shrinkWrap: true,
+                itemCount: day.exercises.length,
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 10),
+                itemBuilder: (context, index) => WidgetDay(
+                  exercises: day.exercises[index],
                 ),
-              );
-            },
-          ),
+              ),
+            ),
+            CustomButton(
+                width: 150,
+                color: AppColors.colorFFE177Yellow,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => StartScreen(
+                        image: image, exercises: day.exercises),
+                    ),
+                  );
+                },
+                text: 'Start'),
+            const SizedBox(height: 50),
+          ],
         ),
       ),
     );

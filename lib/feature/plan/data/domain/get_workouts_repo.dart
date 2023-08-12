@@ -9,7 +9,7 @@ class GetWorkoutsRepoImpl implements GetWorkoutsRepo {
   @override
   Future<List<WorkoutsModel>> getWorkouts() async {
     final massage = <WorkoutsModel>[];
-    final snapshot = await FirebaseDatabase.instance.ref('aqua').get();
+    final snapshot = await FirebaseDatabase.instance.ref('plans').get();
 
     if (snapshot.value != null) {
       final map = snapshot.value as Map<dynamic, dynamic>;

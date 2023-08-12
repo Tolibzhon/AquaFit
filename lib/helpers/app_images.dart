@@ -28,4 +28,5 @@ class AppImages {
   static const String trainIcon = 'assets/images/trainIcon.png';
   static const String waterIcon = 'assets/images/waterIcon.png';
     static const String closeShow = 'assets/images/closeShow.png';
+        static const String startEllipse = 'assets/images/startEllipse.png';
 }

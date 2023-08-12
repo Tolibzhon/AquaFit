@@ -1,6 +1,8 @@
+import 'package:aqua_fit/feature/plan/data/workouts_model.dart';
 import 'package:aqua_fit/feature/plan/presentation/day_screen.dart';
 import 'package:aqua_fit/feature/plan/presentation/widget/widget_workuot.dart';
 import 'package:aqua_fit/feature/widgets/custom_app_bar.dart';
+import 'package:aqua_fit/feature/widgets/custom_button.dart';
 import 'package:aqua_fit/feature/widgets/spaces.dart';
 import 'package:aqua_fit/helpers/app_colors.dart';
 import 'package:aqua_fit/helpers/app_text_styles.dart';
@@ -10,19 +12,19 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 
 class WorkoutScreen extends StatelessWidget {
-  const WorkoutScreen({super.key});
-
+  const WorkoutScreen({super.key, required this.model});
+final WorkoutsModel model;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Workout Screen'),
+      appBar:  CustomAppBar(title:model.title),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Column(
           children: [
             CachedNetworkImage(
               imageUrl:
-                  'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80',
+                  model.image,
               placeholder: (_, url) {
                 return SizedBox(
                   height: 180,
@@ -46,9 +48,9 @@ class WorkoutScreen extends StatelessWidget {
                   width: getWidth(context),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    image: const DecorationImage(
+                    image:  DecorationImage(
                       image: NetworkImage(
-                        'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80',
+                        model.image,
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -57,7 +59,7 @@ class WorkoutScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Legs and hamstrings',
+                       model.title,
                         style: AppTextStyles.s24W700(color: Colors.white),
                       ),
                       const Spacer(),
@@ -75,7 +77,7 @@ class WorkoutScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              '21 days left',
+                              '${model.days.length} days left',
                               style: AppTextStyles.s12W400(color: Colors.white),
                             ),
                             const Spacer(),
@@ -96,21 +98,25 @@ class WorkoutScreen extends StatelessWidget {
             Expanded(
               child: ListView.separated(
                 shrinkWrap: true,
-                itemCount: 4,
+                itemCount: model.days.length,
                 separatorBuilder: (context, index) =>
                     const SizedBox(height: 10),
                 itemBuilder: (context, index) => WidgetWorkout(
+                  day: model.days[index],
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const DayScreen(),
+                        builder: (context) =>  DayScreen(
+                          image:model.image,
+                          day: model.days[index],),
                       ),
                     );
                   },
                 ),
               ),
             ),
+            
           ],
         ),
       ),
