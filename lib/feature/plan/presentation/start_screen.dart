@@ -12,11 +12,14 @@ class StartScreen extends StatefulWidget {
   const StartScreen({
     super.key,
     required this.exercises,
-    required this.image, required this.title, required this.calories, required this.day,
+    required this.image,
+    required this.title,
+    required this.calories,
+    required this.day,
   });
   final List<Exercise> exercises;
   final String image;
-  final  String title;
+  final String title;
   final int calories;
   final int day;
   @override
@@ -151,7 +154,7 @@ class _StartScreenState extends State<StartScreen> {
                   widget.image,
                 ),
                 Positioned(
-                  top: 200,
+                  top: 160,
                   child: Container(
                     alignment: Alignment.center,
                     width: 150,
@@ -253,7 +256,7 @@ class _StartScreenState extends State<StartScreen> {
                       const SizedBox(width: 40),
                       currantPage == 4
                           ? CustomButton(
-                              width: 250,
+                              width: 230,
                               height: 50,
                               onPressed: () {
                                 timerMain.cancel();
@@ -275,7 +278,7 @@ class _StartScreenState extends State<StartScreen> {
                                   AppTextStyles.s20W600(color: AppColors.white),
                             )
                           : CustomButton(
-                              width: 250,
+                              width: 230,
                               height: 50,
                               onPressed: () {
                                 controller.nextPage(

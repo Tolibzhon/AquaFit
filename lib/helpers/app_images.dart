@@ -8,6 +8,7 @@ class AppImages {
   static const String closeIcon = 'assets/images/closeICon.png';
   static const String closeShow = 'assets/images/closeShow.png';
   static const String congrats = 'assets/images/congrats.png';
+  static const String lockIcon = 'assets/images/lockIcon.png';
   static const String navbarPlan = 'assets/images/navbarPlan.png';
   static const String navbarPlanActive = 'assets/images/navbarPlanActive.png';
   static const String navbarSaved = 'assets/images/navbarSaved.png';

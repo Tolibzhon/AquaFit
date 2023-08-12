@@ -55,192 +55,193 @@ class _FinishedScreenState extends State<FinishedScreen> {
       body: SafeArea(
         child: BlocProvider(
           create: (context) => SetWorkoutHiveCubit(WorkoutHiveRepoImpl()),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Row(
-                  children: [
-                    const Spacer(),
-                    InkWell(
-                        onTap: () {
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const BottomNavigatorScreen(),
-                            ),
-                            (protected) => false,
-                          );
-                        },
-                        child: Image.asset(AppImages.closeIcon, width: 35)),
-                  ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Row(
+                    children: [
+                      const Spacer(),
+                      InkWell(
+                          onTap: () {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const BottomNavigatorScreen(),
+                              ),
+                              (protected) => false,
+                            );
+                          },
+                          child: Image.asset(AppImages.closeIcon, width: 35)),
+                    ],
+                  ),
                 ),
-              ),
-              Stack(
-                children: [
-                  Container(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 25, left: 25),
-                    width: getWidth(context),
-                    height: 593,
-                    child: Container(
-                      height: getHeight(context),
+                Stack(
+                  children: [
+                    Container(
+                      padding:
+                          const EdgeInsets.only(top: 20, right: 25, left: 25),
                       width: getWidth(context),
-                      decoration: BoxDecoration(
-                        color: AppColors.color0033EABlue,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 80),
-                          Image.asset(AppImages.star1, width: 100),
-                          Image.asset(AppImages.congrats, width: 200),
-                          const SizedBox(height: 40),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    minutes < 10 ? '0$minutes:' : '$minutes:',
-                                    style: AppTextStyles.s28W600(
-                                        color: AppColors.white),
-                                  ),
-                                  Text(
-                                    seconds < 10 ? '0$seconds' : '$seconds',
-                                    style: AppTextStyles.s28W600(
-                                        color: AppColors.white),
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                '${widget.calories}',
-                                style:
-                                    AppTextStyles.s28W600(color: Colors.white),
-                              ),
-                              Text(
-                                '${widget.day}th',
-                                style:
-                                    AppTextStyles.s28W600(color: Colors.white),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                'Duration',
-                                style:
-                                    AppTextStyles.s15W700(color: Colors.white),
-                              ),
-                              Text(
-                                'Kcal',
-                                style:
-                                    AppTextStyles.s15W700(color: Colors.white),
-                              ),
-                              Text(
-                                'Day',
-                                style:
-                                    AppTextStyles.s15W700(color: Colors.white),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          BlocConsumer<SetWorkoutHiveCubit,
-                              SetWorkoutHiveState>(
-                            listener: (context, state) {
-                              state.whenOrNull(
-                                success: () {
-                                  Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const BottomNavigatorScreen(
-                                        index: 2,
-                                      ),
+                      height: 593,
+                      child: Container(
+                        height: getHeight(context),
+                        width: getWidth(context),
+                        decoration: BoxDecoration(
+                          color: AppColors.color0033EABlue,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 80),
+                            Image.asset(AppImages.star1, width: 100),
+                            Image.asset(AppImages.congrats, width: 200),
+                            const SizedBox(height: 40),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      minutes < 10 ? '0$minutes:' : '$minutes:',
+                                      style: AppTextStyles.s28W600(
+                                          color: AppColors.white),
                                     ),
-                                    (protected) => false,
-                                  );
-                                },
-                              );
-                            },
-                            builder: (context, state) {
-                              bool containsSimilarTitle =
-                                  list.any((e) => e == widget.title);
-                              return CustomButton(
-                                onPressed: containsSimilarTitle == false
-                                    ? () async {
-                                        list.add(widget.title);
+                                    Text(
+                                      seconds < 10 ? '0$seconds' : '$seconds',
+                                      style: AppTextStyles.s28W600(
+                                          color: AppColors.white),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  '${widget.calories}',
+                                  style: AppTextStyles.s28W600(
+                                      color: Colors.white),
+                                ),
+                                Text(
+                                  '${widget.day}th',
+                                  style: AppTextStyles.s28W600(
+                                      color: Colors.white),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  'Duration',
+                                  style: AppTextStyles.s15W700(
+                                      color: Colors.white),
+                                ),
+                                Text(
+                                  'Kcal',
+                                  style: AppTextStyles.s15W700(
+                                      color: Colors.white),
+                                ),
+                                Text(
+                                  'Day',
+                                  style: AppTextStyles.s15W700(
+                                      color: Colors.white),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                            BlocConsumer<SetWorkoutHiveCubit,
+                                SetWorkoutHiveState>(
+                              listener: (context, state) {
+                                state.whenOrNull(
+                                  success: () {
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const BottomNavigatorScreen(
+                                          index: 2,
+                                        ),
+                                      ),
+                                      (protected) => false,
+                                    );
+                                  },
+                                );
+                              },
+                              builder: (context, state) {
+                                bool containsSimilarTitle =
+                                    list.any((e) => e == widget.title);
+                                return CustomButton(
+                                  onPressed: containsSimilarTitle == false
+                                      ? () async {
+                                          list.add(widget.title);
 
-                                        workouts++;
-                                        await SavedData.setIsChek(list);
-                                        await SavedData.setWorkouts(workouts);
+                                          workouts++;
+                                          await SavedData.setIsChek(list);
+                                          await SavedData.setWorkouts(workouts);
 
-                                        WorkoutHiveModel workoutHiveModel =
-                                            WorkoutHiveModel(
-                                                id: DateTime.now()
-                                                    .millisecondsSinceEpoch,
-                                                title: widget.title,
-                                                calories: widget.calories,
-                                                day: widget.day,
-                                                duration: widget.duration,
-                                                date: DateTime.now());
-                                        context
-                                            .read<SetWorkoutHiveCubit>()
-                                            .setWorkout(workoutHiveModel);
-                                      }
-                                    : () {
-                                        Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const BottomNavigatorScreen(),
-                                          ),
-                                          (protected) => false,
-                                        );
-                                      },
-                                width: 250,
-                                color: AppColors.colorFFE177Yellow,
-                                text: 'Add to saved',
-                                textColor: AppColors.color0033EABlue,
-                              );
-                            },
-                          )
-                        ],
+                                          WorkoutHiveModel workoutHiveModel =
+                                              WorkoutHiveModel(
+                                                  id: DateTime.now()
+                                                      .millisecondsSinceEpoch,
+                                                  title: widget.title,
+                                                  calories: widget.calories,
+                                                  day: widget.day,
+                                                  duration: widget.duration,
+                                                  date: DateTime.now());
+                                          context
+                                              .read<SetWorkoutHiveCubit>()
+                                              .setWorkout(workoutHiveModel);
+                                        }
+                                      : () {
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const BottomNavigatorScreen(),
+                                            ),
+                                            (protected) => false,
+                                          );
+                                        },
+                                  width: 250,
+                                  color: AppColors.colorFFE177Yellow,
+                                  text: 'Add to saved',
+                                  textColor: AppColors.color0033EABlue,
+                                );
+                              },
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  Image.asset(
-                    AppImages.star2,
-                    width: 100,
-                  ),
-                  Positioned(
-                    right: 0,
-                    child: Image.asset(
-                      AppImages.star3,
+                    Image.asset(
+                      AppImages.star2,
                       width: 100,
                     ),
-                  ),
-                ],
-              ),
-              const Spacer(),
-              CustomButton(
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BottomNavigatorScreen(),
+                    Positioned(
+                      right: 0,
+                      child: Image.asset(
+                        AppImages.star3,
+                        width: 100,
+                      ),
                     ),
-                    (protected) => false,
-                  );
-                },
-                width: 250,
-                text: 'Return',
-              ),
-              const Spacer(),
-            ],
+                  ],
+                ),
+                const SizedBox(height: 25),
+                CustomButton(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BottomNavigatorScreen(),
+                      ),
+                      (protected) => false,
+                    );
+                  },
+                  width: 250,
+                  text: 'Return',
+                ),
+              ],
+            ),
           ),
         ),
       ),

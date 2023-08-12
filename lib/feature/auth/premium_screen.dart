@@ -66,7 +66,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
               const Spacer(),
               Row(
                 children: [
-                  const SizedBox(width: 20),
+                  const SizedBox(width: 15),
                   Image.asset(AppImages.checkPremium, width: 25),
                   const SizedBox(width: 10),
                   Text(
@@ -78,7 +78,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  const SizedBox(width: 20),
+                  const SizedBox(width: 15),
                   Image.asset(AppImages.checkPremium, width: 25),
                   const SizedBox(width: 10),
                   Text(

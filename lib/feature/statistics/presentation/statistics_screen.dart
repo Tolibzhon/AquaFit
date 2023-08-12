@@ -104,7 +104,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                                             minutes < 10
                                                 ? '0$minutes:'
                                                 : '$minutes:',
-                                            style: AppTextStyles.s32W500(
+                                            style: AppTextStyles.s28W600(
                                                 color:
                                                     AppColors.color0033EABlue),
                                           ),
@@ -112,7 +112,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                                             seconds < 10
                                                 ? '0$seconds'
                                                 : '$seconds',
-                                            style: AppTextStyles.s32W500(
+                                            style: AppTextStyles.s28W600(
                                                 color:
                                                     AppColors.color0033EABlue),
                                           ),

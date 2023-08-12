@@ -1,3 +1,5 @@
+import 'package:aqua_fit/config/premium.dart';
+import 'package:aqua_fit/feature/auth/premium_screen.dart';
 import 'package:aqua_fit/feature/plan/data/cubit/get_workouts_cubit.dart';
 import 'package:aqua_fit/feature/plan/data/domain/get_workouts_repo.dart';
 import 'package:aqua_fit/feature/plan/presentation/widget/widget_plan.dart';
@@ -43,15 +45,28 @@ class PlanScreen extends StatelessWidget {
                                 const SizedBox(height: 16),
                             itemBuilder: (context, index) => WidgetPlan(
                               model: model[index],
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        WorkoutScreen(model: model[index]),
-                                  ),
-                                );
+                              onTap: () async {
+                                final isBuy = await Premium.getSubscrp();
+                                if (!isBuy && index > 2) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const PremiumScreen(
+                                        isPop: true,
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          WorkoutScreen(model: model[index]),
+                                    ),
+                                  );
+                                }
                               },
+                              index: index,
                             ),
                           ),
                         );
