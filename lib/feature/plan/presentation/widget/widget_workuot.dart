@@ -1,9 +1,9 @@
+import 'package:aqua_fit/config/premium.dart';
 import 'package:aqua_fit/feature/plan/data/workouts_model.dart';
 import 'package:aqua_fit/feature/widgets/spaces.dart';
 import 'package:aqua_fit/helpers/app_colors.dart';
 import 'package:aqua_fit/helpers/app_images.dart';
 import 'package:aqua_fit/helpers/app_text_styles.dart';
-import 'package:aqua_fit/helpers/saved_data.dart';
 import 'package:flutter/material.dart';
 
 class WidgetWorkout extends StatelessWidget {
@@ -12,10 +12,12 @@ class WidgetWorkout extends StatelessWidget {
     required this.onTap,
     required this.day,
     required this.chek,
+    required this.index,
   });
   final Function() onTap;
   final Day day;
   final bool chek;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +40,45 @@ class WidgetWorkout extends StatelessWidget {
               style: AppTextStyles.s15W600(color: Colors.white),
             ),
             const Spacer(),
-            chek
-                ? CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 14,
-                    child: Image.asset(AppImages.checkIcon),
-                  )
-                : CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 14,
-                    child: Image.asset(AppImages.checkIconEmpty),
+            FutureBuilder(
+              future: Premium.getSubscrp(),
+              builder: (context, AsyncSnapshot<bool?> snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data!) {
+                    return const SizedBox();
+                  } else if (!snapshot.data! && index > 2) {
+                    return CircleAvatar(
+                      radius: 14,
+                      backgroundColor: AppColors.white,
+                      child: Image.asset(
+                        AppImages.lockIcon,
+                        width: 30,
+                      ),
+                    );
+                  } else if (!snapshot.data! && index < 3) {
+                    return chek
+                        ? CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 14,
+                            child: Image.asset(AppImages.checkIcon),
+                          )
+                        : CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 14,
+                            child: Image.asset(AppImages.checkIconEmpty),
+                          );
+                  }
+                }
+                return CircleAvatar(
+                  radius: 14,
+                  backgroundColor: AppColors.white,
+                  child: Image.asset(
+                    AppImages.lockIcon,
+                    width: 35,
                   ),
+                );
+              },
+            ),
             const SizedBox(width: 12),
           ],
         ),

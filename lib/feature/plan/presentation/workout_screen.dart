@@ -1,3 +1,5 @@
+import 'package:aqua_fit/config/premium.dart';
+import 'package:aqua_fit/feature/auth/premium_screen.dart';
 import 'package:aqua_fit/feature/plan/data/workouts_model.dart';
 import 'package:aqua_fit/feature/plan/presentation/day_screen.dart';
 import 'package:aqua_fit/feature/plan/presentation/widget/widget_workuot.dart';
@@ -14,7 +16,8 @@ import 'package:shimmer/shimmer.dart';
 class WorkoutScreen extends StatefulWidget {
   const WorkoutScreen({
     super.key,
-    required this.model, required this.index,
+    required this.model,
+    required this.index,
   });
   final WorkoutsModel model;
   final int index;
@@ -170,20 +173,33 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                     return WidgetWorkout(
                       day: widget.model.days[index],
                       chek: chek,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DayScreen(
-                              index: widget.index,
-                              image: widget.model.image,
-                              day: widget.model.days[index],
-                              title: widget.model.title,
-                              calories: widget.model.calories,
+                      onTap: () async {
+                        final isBuy = await Premium.getSubscrp();
+                        if (!isBuy && index > 2) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const PremiumScreen(
+                                isPop: true,
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DayScreen(
+                                index: widget.index,
+                                image: widget.model.image,
+                                day: widget.model.days[index],
+                                title: widget.model.title,
+                                calories: widget.model.calories,
+                              ),
+                            ),
+                          );
+                        }
                       },
+                      index: index,
                     );
                   }),
             ),
