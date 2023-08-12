@@ -11,19 +11,39 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 
-class WorkoutScreen extends StatelessWidget {
+class WorkoutScreen extends StatefulWidget {
   const WorkoutScreen({super.key, required this.model});
   final WorkoutsModel model;
+
+  @override
+  State<WorkoutScreen> createState() => _WorkoutScreenState();
+}
+
+class _WorkoutScreenState extends State<WorkoutScreen> {
+  int day = 0;
+  @override
+  void initState() {
+    savedData();
+    super.initState();
+  }
+
+  Future<void> savedData() async {
+    var dayConsSavedData = await SavedData.getDay();
+    setState(() {
+      day = dayConsSavedData;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: model.title),
+      appBar: CustomAppBar(title: widget.model.title),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Column(
           children: [
             CachedNetworkImage(
-              imageUrl: model.image,
+              imageUrl: widget.model.image,
               placeholder: (_, url) {
                 return SizedBox(
                   height: 180,
@@ -49,7 +69,7 @@ class WorkoutScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
                       image: NetworkImage(
-                        model.image,
+                        widget.model.image,
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -58,48 +78,44 @@ class WorkoutScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        model.title,
+                        widget.model.title,
                         style: AppTextStyles.s24W700(color: Colors.white),
                       ),
                       const Spacer(),
-                      FutureBuilder(
-                          future: SavedData.getDay(),
-                          builder: (context, data) {
-                            return LinearPercentIndicator(
-                              alignment: MainAxisAlignment.start,
-                              barRadius: const Radius.circular(10),
-                              lineHeight: 10.0,
-                              percent: data == 1
-                                  ? 0.14
-                                  : data == 2
-                                      ? 0.28
-                                      : data == 3
-                                          ? 0.42
-                                          : data == 4
-                                              ? 0.56
-                                              : data == 5
-                                                  ? 0.70
-                                                  : data == 6
-                                                      ? 0.85
-                                                      : data == 7
-                                                          ? 1
-                                                          : 0,
-                              backgroundColor: AppColors.lightGrey,
-                              progressColor: AppColors.colorFFE177Yellow,
-                            );
-                          }),
+                      LinearPercentIndicator(
+                        alignment: MainAxisAlignment.start,
+                        barRadius: const Radius.circular(10),
+                        lineHeight: 10.0,
+                        percent: day == 1
+                            ? 0.14
+                            : day == 2
+                                ? 0.28
+                                : day == 3
+                                    ? 0.42
+                                    : day == 4
+                                        ? 0.56
+                                        : day == 5
+                                            ? 0.70
+                                            : day == 6
+                                                ? 0.85
+                                                : day == 7
+                                                    ? 1
+                                                    : 0,
+                        backgroundColor: AppColors.lightGrey,
+                        progressColor: AppColors.colorFFE177Yellow,
+                      ),
                       const SizedBox(height: 4),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Row(
                           children: [
                             Text(
-                              '${model.days.length} days left',
+                              '$day days left',
                               style: AppTextStyles.s12W400(color: Colors.white),
                             ),
                             const Spacer(),
                             Text(
-                              '0 %',
+                              '${(day * 100) / day} %',
                               style: AppTextStyles.s12W400(color: Colors.white),
                             ),
                           ],
@@ -115,20 +131,24 @@ class WorkoutScreen extends StatelessWidget {
             Expanded(
               child: ListView.separated(
                 shrinkWrap: true,
-                itemCount: model.days.length,
+                itemCount: widget.model.days.length,
                 separatorBuilder: (context, index) =>
                     const SizedBox(height: 10),
                 itemBuilder: (context, index) => WidgetWorkout(
-                  day: model.days[index],
-                  onTap: () {
+                  day: widget.model.days[index],
+                  onTap: () async {
+                    if (day < 7) {
+                      day++;
+                      await SavedData.setDay(day);
+                    }
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => DayScreen(
-                          image: model.image,
-                          day: model.days[index],
-                           title: model.title,
-                          calories: model.calories,
+                          image: widget.model.image,
+                          day: widget.model.days[index],
+                          title: widget.model.title,
+                          calories: widget.model.calories,
                         ),
                       ),
                     );
