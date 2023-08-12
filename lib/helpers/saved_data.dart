@@ -1,6 +1,31 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SavedData {
+    //-----------
+  static Future<List<String>> getChekTitle() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    return prefs.getStringList('ChekTitle') ?? [];
+  }
+
+  static Future<void> setChekTitle(List<String> chekTitle) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setStringList('ChekTitle', chekTitle);
+  }
+
+  static Future<List<String>> getChekDay() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    return prefs.getStringList('ChekDay') ?? [];
+  }
+
+  static Future<void> setChekDay(List<String> chekDay) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setStringList('ChekDay', chekDay);
+  }
+
+  //-----------
+
   static Future<int> getWaterCons() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt('WaterCons') ?? 0;
@@ -21,26 +46,29 @@ class SavedData {
     prefs.setInt('Workouts', workouts);
   }
 
-  static Future<List<String>> getIsChek() async {
+  static Future<List<String>> getIsChekTitle() async {
     final prefs = await SharedPreferences.getInstance();
 
-    return prefs.getStringList('IsChek') ?? [];
+    return prefs.getStringList('IsChekTitle') ?? [];
   }
 
-  static Future<void> setIsChek(List<String> isChek) async {
+  static Future<void> setIsChekTitle(List<String> isChekTitle) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('IsChek', isChek);
+    prefs.setStringList('IsChekTitle', isChekTitle);
   }
 
-  static Future<int> getDay() async {
+  static Future<List<String>> getIsChekDay() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('Day') ?? 0;
+
+    return prefs.getStringList('IsChekDay') ?? [];
   }
 
-  static Future<void> setDay(int day) async {
+  static Future<void> setIsChekDay(List<String> isChekDay) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setInt('Day', day);
+    prefs.setStringList('IsChekDay', isChekDay);
   }
+
+ 
 
   static Future<int> getOne() async {
     final prefs = await SharedPreferences.getInstance();
@@ -71,7 +99,15 @@ class SavedData {
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('Three', day);
   }
+static Future<int> getFour() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('Four') ?? 0;
+  }
 
+  static Future<void> setFour(int day) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('Four', day);
+  }
   static Future<int> getFive() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt('Five') ?? 0;

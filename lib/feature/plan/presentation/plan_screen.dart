@@ -44,6 +44,7 @@ class PlanScreen extends StatelessWidget {
                             separatorBuilder: (context, index) =>
                                 const SizedBox(height: 16),
                             itemBuilder: (context, index) => WidgetPlan(
+                         
                               model: model[index],
                               onTap: () async {
                                 final isBuy = await Premium.getSubscrp();
@@ -61,7 +62,9 @@ class PlanScreen extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          WorkoutScreen(model: model[index]),
+                                          WorkoutScreen(
+                                            index: index,
+                                            model: model[index]),
                                     ),
                                   );
                                 }

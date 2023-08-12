@@ -12,11 +12,12 @@ class DayScreen extends StatelessWidget {
       required this.day,
       required this.image,
       required this.title,
-      required this.calories});
+      required this.calories, required this.index});
   final Day day;
   final String image;
   final String title;
   final int calories;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +50,7 @@ class DayScreen extends StatelessWidget {
                         title: title,
                         day: day.day,
                         calories: calories,
+                        index: index,
                       ),
                     ),
                   );

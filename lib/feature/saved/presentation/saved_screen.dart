@@ -70,8 +70,12 @@ class _SavedScreenState extends State<SavedScreen> {
                                                         MaterialPageRoute(
                                                           builder: (context) =>
                                                               WorkoutScreen(
+                                                                  index: model[
+                                                                          index]
+                                                                      .index,
                                                                   model: models[
-                                                                      index]),
+                                                                      model[index]
+                                                                          .index]),
                                                         ),
                                                       );
                                                     },

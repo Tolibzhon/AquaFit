@@ -16,6 +16,8 @@ class WorkoutHiveModel extends HiveObject {
   int day;
   @HiveField(5)
   DateTime date;
+   @HiveField(6)
+  int index;
   
 
   WorkoutHiveModel({
@@ -25,6 +27,7 @@ class WorkoutHiveModel extends HiveObject {
     required this.date,
     required this.day,
     required this.calories,
+    required this.index,
   });
   @override
   String toString() {

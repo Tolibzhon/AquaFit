@@ -12,8 +12,12 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 
 class WorkoutScreen extends StatefulWidget {
-  const WorkoutScreen({super.key, required this.model});
+  const WorkoutScreen({
+    super.key,
+    required this.model, required this.index,
+  });
   final WorkoutsModel model;
+  final int index;
 
   @override
   State<WorkoutScreen> createState() => _WorkoutScreenState();
@@ -21,6 +25,15 @@ class WorkoutScreen extends StatefulWidget {
 
 class _WorkoutScreenState extends State<WorkoutScreen> {
   int day = 0;
+  int day1 = 0;
+  int day2 = 0;
+  int day3 = 0;
+  int day4 = 0;
+  int day5 = 0;
+  int day6 = 0;
+  int day7 = 0;
+  List<String> listTitle = [];
+  List<String> listDay = [];
   @override
   void initState() {
     savedData();
@@ -28,14 +41,45 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   }
 
   Future<void> savedData() async {
-    var dayConsSavedData = await SavedData.getDay();
+    int day1SavedData = await SavedData.getOne();
+    int day2SavedData = await SavedData.getTwo();
+    int day3SavedData = await SavedData.getThree();
+    int day4SavedData = await SavedData.getFour();
+    int day5SavedData = await SavedData.getFive();
+    int day6SavedData = await SavedData.getSix();
+    int day7SavedData = await SavedData.getSeven();
+    List<String> listTitleSavedData = await SavedData.getChekTitle();
+    List<String> listDaySavedData = await SavedData.getChekDay();
     setState(() {
-      day = dayConsSavedData;
+      day1 = day1SavedData;
+      day2 = day2SavedData;
+      day3 = day3SavedData;
+      day4 = day4SavedData;
+      day5 = day5SavedData;
+      day6 = day6SavedData;
+      day7 = day7SavedData;
+      listTitle = listTitleSavedData;
+      listDay = listDaySavedData;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.model.title == 'Full Body Workout') {
+      day = day1;
+    } else if (widget.model.title == 'Cardio Intensity') {
+      day = day2;
+    } else if (widget.model.title == 'Strength Training') {
+      day = day3;
+    } else if (widget.model.title == 'Yoga and Meditation') {
+      day = day4;
+    } else if (widget.model.title == 'Strength Training') {
+      day = day5;
+    } else if (widget.model.title == 'Cardio Blast') {
+      day = day6;
+    } else if (widget.model.title == 'Yoga and Meditation') {
+      day = day7;
+    }
     return Scaffold(
       appBar: CustomAppBar(title: widget.model.title),
       body: Padding(
@@ -86,21 +130,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                         alignment: MainAxisAlignment.start,
                         barRadius: const Radius.circular(10),
                         lineHeight: 10.0,
-                        percent: day == 1
-                            ? 0.14
-                            : day == 2
-                                ? 0.28
-                                : day == 3
-                                    ? 0.42
-                                    : day == 4
-                                        ? 0.56
-                                        : day == 5
-                                            ? 0.70
-                                            : day == 6
-                                                ? 0.85
-                                                : day == 7
-                                                    ? 1
-                                                    : 0,
+                        percent: (day * 1) / widget.model.days.length,
                         backgroundColor: AppColors.lightGrey,
                         progressColor: AppColors.colorFFE177Yellow,
                       ),
@@ -115,7 +145,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                             ),
                             const Spacer(),
                             Text(
-                              '${(day * 100) / day} %',
+                              '${(day * 100) ~/ widget.model.days.length} %',
                               style: AppTextStyles.s12W400(color: Colors.white),
                             ),
                           ],
@@ -130,31 +160,32 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
             const SizedBox(height: 20),
             Expanded(
               child: ListView.separated(
-                shrinkWrap: true,
-                itemCount: widget.model.days.length,
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 10),
-                itemBuilder: (context, index) => WidgetWorkout(
-                  day: widget.model.days[index],
-                  onTap: () async {
-                    if (day < 7) {
-                      day++;
-                      await SavedData.setDay(day);
-                    }
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DayScreen(
-                          image: widget.model.image,
-                          day: widget.model.days[index],
-                          title: widget.model.title,
-                          calories: widget.model.calories,
-                        ),
-                      ),
+                  shrinkWrap: true,
+                  itemCount: widget.model.days.length,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
+                  itemBuilder: (context, index) {
+                    bool chek = listTitle.contains(widget.model.title) &&
+                        listDay.contains('${widget.model.days[index].day}');
+                    return WidgetWorkout(
+                      day: widget.model.days[index],
+                      chek: chek,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DayScreen(
+                              index: widget.index,
+                              image: widget.model.image,
+                              day: widget.model.days[index],
+                              title: widget.model.title,
+                              calories: widget.model.calories,
+                            ),
+                          ),
+                        );
+                      },
                     );
-                  },
-                ),
-              ),
+                  }),
             ),
           ],
         ),

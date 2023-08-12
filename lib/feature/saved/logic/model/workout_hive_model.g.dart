@@ -23,13 +23,14 @@ class WorkoutHiveModelAdapter extends TypeAdapter<WorkoutHiveModel> {
       date: fields[5] as DateTime,
       day: fields[4] as int,
       calories: fields[2] as int,
+      index: fields[6] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, WorkoutHiveModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class WorkoutHiveModelAdapter extends TypeAdapter<WorkoutHiveModel> {
       ..writeByte(4)
       ..write(obj.day)
       ..writeByte(5)
-      ..write(obj.date);
+      ..write(obj.date)
+      ..writeByte(6)
+      ..write(obj.index);
   }
 
   @override
