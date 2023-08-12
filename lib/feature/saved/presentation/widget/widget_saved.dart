@@ -1,3 +1,4 @@
+import 'package:aqua_fit/feature/saved/logic/model/workout_hive_model.dart';
 import 'package:aqua_fit/feature/widgets/spaces.dart';
 import 'package:aqua_fit/helpers/app_colors.dart';
 import 'package:aqua_fit/helpers/app_text_styles.dart';
@@ -6,8 +7,9 @@ import 'package:flutter/material.dart';
 class WidgetSaved extends StatelessWidget {
   const WidgetSaved({
     super.key,
+    required this.model,
   });
-
+  final WorkoutHiveModel model;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,11 +27,11 @@ class WidgetSaved extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Legs and hamstrings',
+                model.title,
                 style: AppTextStyles.s16W500(color: Colors.white),
               ),
               Text(
-                'Day 5',
+                'Day ${model.day}',
                 style: AppTextStyles.s12W400(color: Colors.white),
               ),
             ],

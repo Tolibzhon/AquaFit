@@ -8,7 +8,7 @@ class ContainerWidget extends StatelessWidget {
     required this.count,
     required this.title,
   });
-  final int count;
+  final String count;
   final String title;
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ContainerWidget extends StatelessWidget {
         ),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
-            '$count',
+            count,
             style: AppTextStyles.s32W500(color: AppColors.color0033EABlue),
           ),
           const SizedBox(height: 5),
