@@ -20,4 +20,26 @@ class SavedData {
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('Workouts', workouts);
   }
+
+  static Future<List<String>> getIsChek() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    return prefs.getStringList('IsChek') ?? [];
+  }
+
+  static Future<void> setIsChek(List<String> isChek) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setStringList('IsChek', isChek);
+  }
+
+
+  static Future<int> getDay() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('Day') ?? 0;
+  }
+
+  static Future<void> setDay(int day) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('Day', day);
+  }
 }

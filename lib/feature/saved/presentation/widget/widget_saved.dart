@@ -7,38 +7,42 @@ import 'package:flutter/material.dart';
 class WidgetSaved extends StatelessWidget {
   const WidgetSaved({
     super.key,
-    required this.model,
+    required this.model, required this.onTap,
   });
   final WorkoutHiveModel model;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
-      width: getWidth(context),
-      height: 60,
-      decoration: BoxDecoration(
-        color: AppColors.color3E68FFBg,
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Row(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                model.title,
-                style: AppTextStyles.s16W500(color: Colors.white),
-              ),
-              Text(
-                'Day ${model.day}',
-                style: AppTextStyles.s12W400(color: Colors.white),
-              ),
-            ],
-          ),
-          const Spacer(),
-          const Icon(Icons.chevron_right, color: Colors.white, size: 30),
-        ],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 25),
+        width: getWidth(context),
+        height: 60,
+        decoration: BoxDecoration(
+          color: AppColors.color3E68FFBg,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  model.title,
+                  style: AppTextStyles.s16W500(color: Colors.white),
+                ),
+                Text(
+                  'Day ${model.day}',
+                  style: AppTextStyles.s12W400(color: Colors.white),
+                ),
+              ],
+            ),
+            const Spacer(),
+            const Icon(Icons.chevron_right, color: Colors.white, size: 30),
+          ],
+        ),
       ),
     );
   }

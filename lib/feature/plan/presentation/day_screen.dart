@@ -7,9 +7,16 @@ import 'package:aqua_fit/helpers/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class DayScreen extends StatelessWidget {
-  const DayScreen({super.key, required this.day, required this.image});
+  const DayScreen(
+      {super.key,
+      required this.day,
+      required this.image,
+      required this.title,
+      required this.calories});
   final Day day;
   final String image;
+  final String title;
+  final int calories;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +44,12 @@ class DayScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => StartScreen(
-                        image: image, exercises: day.exercises),
+                        image: image,
+                        exercises: day.exercises,
+                        title: title,
+                        day: day.day,
+                        calories: calories,
+                      ),
                     ),
                   );
                 },

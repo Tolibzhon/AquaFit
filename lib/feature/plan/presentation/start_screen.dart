@@ -12,10 +12,13 @@ class StartScreen extends StatefulWidget {
   const StartScreen({
     super.key,
     required this.exercises,
-    required this.image,
+    required this.image, required this.title, required this.calories, required this.day,
   });
   final List<Exercise> exercises;
   final String image;
+  final  String title;
+  final int calories;
+  final int day;
   @override
   State<StartScreen> createState() => _StartScreenState();
 }
@@ -257,8 +260,12 @@ class _StartScreenState extends State<StartScreen> {
                                 Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const FinishedScreen(),
+                                    builder: (context) => FinishedScreen(
+                                      title: widget.title,
+                                      calories: widget.calories,
+                                      day: widget.day,
+                                      duration: secondMain,
+                                    ),
                                   ),
                                   (protected) => false,
                                 );

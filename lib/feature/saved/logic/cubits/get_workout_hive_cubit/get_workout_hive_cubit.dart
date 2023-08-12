@@ -21,76 +21,50 @@ class GetWorkoutHiveCubit extends Cubit<GetWorkoutHiveState> {
     }
   }
 
-  getWorkoutStatistic() async {
-    emit(const GetWorkoutHiveState.loading());
+  // getWorkoutStatistic() async {
+  //   emit(const GetWorkoutHiveState.loading());
 
-    // final dateNow = DateTime.now();
-    try {
-      final dreamsList = await workoutRepo.getWorkout();
-      // List<List<WorkoutHiveModel>> dividedList = [];
+  //   try {
+  //     final dreamsList = await workoutRepo.getWorkout();
 
-      List<WorkoutHiveModel> averagedModels =
-          groupAndCalculateAverage(dreamsList);
+  //     List<WorkoutHiveModel> averagedModels =
+  //         groupAndCalculateAverage(dreamsList);
 
-      // Set<String> uniqueDates = Set<String>();
-      // List<WorkoutHiveModel> filteredData = [];
+ 
+  //     emit(GetWorkoutHiveState.success(averagedModels));
+  //   } catch (e) {
+  //     emit(GetWorkoutHiveState.error(e.toString()));
+  //   }
+  // }
 
-      // for (var item in dreamsList) {
-      //   if (!uniqueDates.contains(dateFormatMain.format(item.dateNow))) {
-      //     uniqueDates.add(dateFormatMain.format(item.dateNow));
-      //     filteredData.add(item);
-      //   }
-      // }
-      // int n = filter - averagedModels.length;
-      // if (averagedModels.isNotEmpty) {
-      //   for (var i = 1; i <= n; i++) {
-      //     averagedModels.insert(
-      //       0,
-      //       WorkoutHiveModel(
-      //           id: 0,
-      //           dateNow: averagedModels.first.dateNow.subtract(Duration(days: 1)),
-      //           dateDuration: 0,
-      //           dateTime: '',
-      //           quality: 0, //add
-      //           percentNum: 0),
-      //     );
-      //   }
-      // }
-      //jj
-
-      emit(GetWorkoutHiveState.success(averagedModels));
-    } catch (e) {
-      emit(GetWorkoutHiveState.error(e.toString()));
-    }
-  }
 }
 
-List<WorkoutHiveModel> groupAndCalculateAverage(List<WorkoutHiveModel> models) {
-  List<WorkoutHiveModel> averagedData = [];
+// List<WorkoutHiveModel> groupAndCalculateAverage(List<WorkoutHiveModel> models) {
+//   List<WorkoutHiveModel> averagedData = [];
 
-  // Перебираем модели
-  for (var model in models) {
-    // Ищем модель с той же датой в результирующем списке
-    var existingModel = averagedData.firstWhere(
-      (m) => m.date.day == model.date.day,
-      orElse: () => WorkoutHiveModel(
-        id: model.id,
-        day: model.day,
-        date: model.date,
-        calories: model.calories,
-        duration: model.duration,
-        title: model.title,
-      ),
-    );
+//   // Перебираем модели
+//   for (var model in models) {
+//     // Ищем модель с той же датой в результирующем списке
+//     var existingModel = averagedData.firstWhere(
+//       (m) => m.date.day == model.date.day,
+//       orElse: () => WorkoutHiveModel(
+//         id: model.id,
+//         day: model.day,
+//         date: model.date,
+//         calories: model.calories,
+//         duration: model.duration,
+//         title: model.title,
+//       ),
+//     );
 
-    // Обновляем значения
-    existingModel.calories += model.calories;
-    // existingModel.dateDuration ~/= 2; // Вычисляем среднее значение
+//     // Обновляем значения
+//     existingModel.calories += model.calories;
+//     // existingModel.dateDuration ~/= 2; // Вычисляем среднее значение
 
-    if (!averagedData.contains(existingModel)) {
-      averagedData.add(existingModel);
-    }
-  }
+//     if (!averagedData.contains(existingModel)) {
+//       averagedData.add(existingModel);
+//     }
+//   }
 
-  return averagedData;
-}
+//   return averagedData;
+// }

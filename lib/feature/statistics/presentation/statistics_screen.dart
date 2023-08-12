@@ -1,5 +1,6 @@
 import 'package:aqua_fit/feature/saved/logic/cubits/get_workout_hive_cubit/get_workout_hive_cubit.dart';
 import 'package:aqua_fit/feature/statistics/widget/container_widget.dart';
+import 'package:aqua_fit/feature/statistics/widget/widget_statistic_container.dart';
 import 'package:aqua_fit/feature/widgets/app_error_text.dart';
 import 'package:aqua_fit/feature/widgets/app_indicator.dart';
 import 'package:aqua_fit/feature/widgets/custom_app_bar.dart';
@@ -65,6 +66,10 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                     int resultDuration = model.isNotEmpty
                         ? amount(model.map((e) => e.duration).toList()).toInt()
                         : 0;
+
+                    int minutes = resultDuration ~/ 60;
+                    int seconds = resultDuration % 60;
+
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -75,9 +80,53 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                         const SizedBox(height: 20),
                         Row(
                           children: [
-                            ContainerWidget(count: '$workouts', title: 'Workouts'),
+                            ContainerWidget(
+                                count: '$workouts', title: 'Workouts'),
                             const SizedBox(width: 20),
-                            ContainerWidget(count: '0', title: 'Duration'),
+                            Expanded(
+                              child: Container(
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                    color: AppColors.color0033EABlue,
+                                    width: 2,
+                                  ),
+                                ),
+                                child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            minutes < 10
+                                                ? '0$minutes:'
+                                                : '$minutes:',
+                                            style: AppTextStyles.s32W500(
+                                                color:
+                                                    AppColors.color0033EABlue),
+                                          ),
+                                          Text(
+                                            seconds < 10
+                                                ? '0$seconds'
+                                                : '$seconds',
+                                            style: AppTextStyles.s32W500(
+                                                color:
+                                                    AppColors.color0033EABlue),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        'Duration',
+                                        style: AppTextStyles.s12W500(
+                                            color: AppColors.black),
+                                      ),
+                                    ]),
+                              ),
+                            ),
                             const SizedBox(width: 20),
                             ContainerWidget(
                                 count: '$resultCalories', title: 'Calories'),
@@ -238,75 +287,80 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                                 AppTextStyles.s16W400(color: AppColors.black),
                           ),
                         ),
-                        Container(
-                          padding: const EdgeInsets.all(15),
-                          width: getWidth(context),
-                          decoration: BoxDecoration(
-                            color: AppColors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                spreadRadius: 0.2,
-                                blurRadius: 1,
+                        model.isNotEmpty
+                            ? WidgetStatisticContainer(
+                                model: model,
+                              )
+                            : Container(
+                                padding: const EdgeInsets.all(15),
+                                width: getWidth(context),
+                                decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 0.2,
+                                      blurRadius: 1,
+                                    ),
+                                  ],
+                                ),
+                                child: Stack(
+                                  alignment: AlignmentDirectional.center,
+                                  // crossAxisAlignment:
+                                  //     CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text(
+                                              '300',
+                                              style: AppTextStyles.s13W400(
+                                                  color: Colors.black),
+                                            ),
+                                            const SizedBox(height: 20),
+                                            Text(
+                                              '250',
+                                              style: AppTextStyles.s13W400(
+                                                  color: Colors.black),
+                                            ),
+                                            const SizedBox(height: 20),
+                                            Text(
+                                              '200',
+                                              style: AppTextStyles.s13W400(
+                                                  color: Colors.black),
+                                            ),
+                                            const SizedBox(height: 20),
+                                            Text(
+                                              '150',
+                                              style: AppTextStyles.s13W400(
+                                                  color: Colors.black),
+                                            ),
+                                            const SizedBox(height: 20),
+                                            Text(
+                                              '100',
+                                              style: AppTextStyles.s13W400(
+                                                  color: Colors.black),
+                                            ),
+                                            const SizedBox(height: 20),
+                                            Text(
+                                              '50',
+                                              style: AppTextStyles.s13W400(
+                                                  color: Colors.black),
+                                            ),
+                                            const SizedBox(height: 20),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
-                          child: Stack(
-                            alignment: AlignmentDirectional.center,
-                            // crossAxisAlignment:
-                            //     CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Text(
-                                        '300',
-                                        style: AppTextStyles.s13W400(
-                                            color: Colors.black),
-                                      ),
-                                      const SizedBox(height: 20),
-                                      Text(
-                                        '250',
-                                        style: AppTextStyles.s13W400(
-                                            color: Colors.black),
-                                      ),
-                                      const SizedBox(height: 20),
-                                      Text(
-                                        '200',
-                                        style: AppTextStyles.s13W400(
-                                            color: Colors.black),
-                                      ),
-                                      const SizedBox(height: 20),
-                                      Text(
-                                        '150',
-                                        style: AppTextStyles.s13W400(
-                                            color: Colors.black),
-                                      ),
-                                      const SizedBox(height: 20),
-                                      Text(
-                                        '100',
-                                        style: AppTextStyles.s13W400(
-                                            color: Colors.black),
-                                      ),
-                                      const SizedBox(height: 20),
-                                      Text(
-                                        '50',
-                                        style: AppTextStyles.s13W400(
-                                            color: Colors.black),
-                                      ),
-                                      const SizedBox(height: 20),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
                       ],
                     );
                   });
