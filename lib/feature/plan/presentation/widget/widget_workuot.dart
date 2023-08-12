@@ -8,12 +8,15 @@ import 'package:flutter/material.dart';
 class WidgetWorkout extends StatelessWidget {
   const WidgetWorkout({
     super.key,
-    required this.onTap, required this.day,
+    required this.onTap,
+    required this.day,
   });
   final Function() onTap;
   final Day day;
+
   @override
   Widget build(BuildContext context) {
+    bool chek = false;
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -31,11 +34,17 @@ class WidgetWorkout extends StatelessWidget {
               style: AppTextStyles.s15W600(color: Colors.white),
             ),
             const Spacer(),
-            CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: 14,
-              child: Image.asset(AppImages.checkIcon),
-            ),
+            chek == true
+                ? CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 14,
+                    child: Image.asset(AppImages.checkIcon),
+                  )
+                : CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 14,
+                    child: Image.asset(AppImages.checkIconEmpty),
+                  ),
             const SizedBox(width: 12),
           ],
         ),
