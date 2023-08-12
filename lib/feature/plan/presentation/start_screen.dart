@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:aqua_fit/feature/plan/data/workouts_model.dart';
+import 'package:aqua_fit/feature/plan/presentation/finished_screen.dart';
 import 'package:aqua_fit/feature/widgets/custom_button.dart';
 import 'package:aqua_fit/helpers/app_colors.dart';
 import 'package:aqua_fit/helpers/app_images.dart';
@@ -253,13 +254,14 @@ class _StartScreenState extends State<StartScreen> {
                               height: 50,
                               onPressed: () {
                                 timerMain.cancel();
-                                // Navigator.pushAndRemoveUntil(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => const PremiumScreen(),
-                                //   ),
-                                //   (protected) => false,
-                                // );
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const FinishedScreen(),
+                                  ),
+                                  (protected) => false,
+                                );
                               },
                               text: 'Finish',
                               style:
