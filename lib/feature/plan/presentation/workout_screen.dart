@@ -127,6 +127,8 @@ class WorkoutScreen extends StatelessWidget {
                         builder: (context) => DayScreen(
                           image: model.image,
                           day: model.days[index],
+                           title: model.title,
+                          calories: model.calories,
                         ),
                       ),
                     );
