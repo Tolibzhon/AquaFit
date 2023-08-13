@@ -21,50 +21,50 @@ class GetWorkoutHiveCubit extends Cubit<GetWorkoutHiveState> {
     }
   }
 
-  // getWorkoutStatistic() async {
-  //   emit(const GetWorkoutHiveState.loading());
+  getWorkoutStatistic() async {
+    emit(const GetWorkoutHiveState.loading());
 
-  //   try {
-  //     final dreamsList = await workoutRepo.getWorkout();
+    try {
+      final dreamsList = await workoutRepo.getWorkout();
 
-  //     List<WorkoutHiveModel> averagedModels =
-  //         groupAndCalculateAverage(dreamsList);
+      List<WorkoutHiveModel> averagedModels =
+          groupAndCalculateAverage(dreamsList);
 
- 
-  //     emit(GetWorkoutHiveState.success(averagedModels));
-  //   } catch (e) {
-  //     emit(GetWorkoutHiveState.error(e.toString()));
-  //   }
-  // }
-
+      emit(GetWorkoutHiveState.success(averagedModels));
+    } catch (e) {
+      emit(GetWorkoutHiveState.error(e.toString()));
+    }
+  }
 }
 
-// List<WorkoutHiveModel> groupAndCalculateAverage(List<WorkoutHiveModel> models) {
-//   List<WorkoutHiveModel> averagedData = [];
+List<WorkoutHiveModel> groupAndCalculateAverage(List<WorkoutHiveModel> models) {
+  List<WorkoutHiveModel> averagedData = [];
 
-//   // Перебираем модели
-//   for (var model in models) {
-//     // Ищем модель с той же датой в результирующем списке
-//     var existingModel = averagedData.firstWhere(
-//       (m) => m.date.day == model.date.day,
-//       orElse: () => WorkoutHiveModel(
-//         id: model.id,
-//         day: model.day,
-//         date: model.date,
-//         calories: model.calories,
-//         duration: model.duration,
-//         title: model.title,
-//       ),
-//     );
+  // Перебираем модели
+  for (var model in models) {
+    // Ищем модель с той же датой в результирующем списке
+    var existingModel = averagedData.firstWhere(
+      (m) => m.date.day == model.date.day,
+      orElse: () => WorkoutHiveModel(
+        id: model.id,
+        day: model.day,
+        date: model.date,
+        calories: model.calories,
+        duration: model.duration,
+        title: model.title,
+        index: model.index,
+      ),
+    );
 
-//     // Обновляем значения
-//     existingModel.calories += model.calories;
-//     // existingModel.dateDuration ~/= 2; // Вычисляем среднее значение
+    // Обновляем значения
+    existingModel.calories += model.calories;
 
-//     if (!averagedData.contains(existingModel)) {
-//       averagedData.add(existingModel);
-//     }
-//   }
+    // existingModel.dateDuration ~/= 2; // Вычисляем среднее значение
 
-//   return averagedData;
-// }
+    if (!averagedData.contains(existingModel)) {
+      averagedData.add(existingModel);
+    }
+  }
+
+  return averagedData;
+}

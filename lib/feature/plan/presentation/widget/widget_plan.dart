@@ -1,8 +1,5 @@
-import 'package:aqua_fit/config/premium.dart';
 import 'package:aqua_fit/feature/plan/data/workouts_model.dart';
 import 'package:aqua_fit/feature/widgets/spaces.dart';
-import 'package:aqua_fit/helpers/app_colors.dart';
-import 'package:aqua_fit/helpers/app_images.dart';
 import 'package:aqua_fit/helpers/app_text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -57,42 +54,9 @@ class WidgetPlan extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      model.title,
-                      style: AppTextStyles.s24W700(color: Colors.white),
-                    ),
-                    const Spacer(),
-                    FutureBuilder(
-                      future: Premium.getSubscrp(),
-                      builder: (context, AsyncSnapshot<bool?> snapshot) {
-                        if (snapshot.hasData) {
-                          if (snapshot.data!) {
-                            return const SizedBox();
-                          } else if (!snapshot.data! && index > 2) {
-                            return CircleAvatar(
-                              radius: 16,
-                              backgroundColor: AppColors.grey,
-                              child: Image.asset(
-                                AppImages.lockIcon,
-                                width: 30,
-                              ),
-                            );
-                          } else if (!snapshot.data! && index < 3) {
-                            return const SizedBox();
-                          }
-                        }
-                        return CircleAvatar(
-                          backgroundColor: AppColors.grey,
-                          child: Image.asset(
-                            AppImages.lockIcon,
-                            width: 35,
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+                Text(
+                  model.title,
+                  style: AppTextStyles.s24W700(color: Colors.white),
                 ),
                 const SizedBox(height: 10),
                 Text(

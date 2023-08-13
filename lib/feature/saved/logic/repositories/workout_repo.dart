@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 abstract class WorkoutHiveRepo {
   Future<List<WorkoutHiveModel>> getWorkout();
   Future<void> setWorkout(WorkoutHiveModel workoutHiveModel);
+  Future<void> deleteWorkout(int id);
 }
 
 class WorkoutHiveRepoImpl implements WorkoutHiveRepo {
@@ -17,5 +18,14 @@ class WorkoutHiveRepoImpl implements WorkoutHiveRepo {
   Future<void> setWorkout(WorkoutHiveModel workoutHiveModel) async {
     final workoutBox = await Hive.openBox<WorkoutHiveModel>('WorkoutBox');
     await workoutBox.add(workoutHiveModel);
+  }
+
+  @override
+  Future<void> deleteWorkout(int id) async {
+    final workoutBox = await Hive.openBox<WorkoutHiveModel>('WorkoutBox');
+    final workoutModel =
+        workoutBox.values.toList().singleWhere((e) => e.id == id);
+    await workoutModel.delete();
+    await workoutBox.compact();
   }
 }

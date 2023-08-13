@@ -7,16 +7,18 @@ import 'package:flutter/material.dart';
 class WidgetSaved extends StatelessWidget {
   const WidgetSaved({
     super.key,
-    required this.model, required this.onTap,
+    required this.model,
+    required this.onTap, required this.onTapIcon,
   });
   final WorkoutHiveModel model;
   final VoidCallback onTap;
+  final VoidCallback onTapIcon;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         width: getWidth(context),
         height: 60,
         decoration: BoxDecoration(
@@ -40,7 +42,16 @@ class WidgetSaved extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            const Icon(Icons.chevron_right, color: Colors.white, size: 30),
+            Row(
+              children: [
+                InkWell(
+                  onTap: onTapIcon,
+                  child: const Icon(Icons.delete_forever_outlined,
+                      size: 30, color: Colors.red),
+                ),
+                const Icon(Icons.chevron_right, color: Colors.white, size: 30),
+              ],
+            ),
           ],
         ),
       ),
